@@ -86,7 +86,7 @@ int main(){
     char* opponent;
     char Pika[] = {"R"};
     //char Pika[] = {""};
-    //opponent = Pika;
+    opponent = Pika;
     //strcpy(Pika,onThree());//This is where the garbage text comes from
     //strcpy(Pika,"R"); //after this line, user loses it's value?
     //printf("User is %s.\n", user);
