@@ -1,2 +1,2 @@
 # RPS-Simulator
-A basic C program for a RPS game.
+A intermediate C program for a RPS game.
