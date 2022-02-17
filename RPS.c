@@ -103,7 +103,7 @@ int main(){
   //free(opponent);
   if(currentscore > hs){
     hs = currentscore;
-    fp = fopen("C:/Users/calum/Desktop/RPS Sim/highscoresourcefile.txt", "w+");
+    fp = fopen("C:/Users/calum/Desktop/RPS Simulator/highscoresourcefile.txt", "w+");
     fprintf(fp, "%d", hs);
   }
   else{
