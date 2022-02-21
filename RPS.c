@@ -8,7 +8,7 @@
 FILE *fp;
 int *highscore;
 
-void generateRPS(char* opponentchoice){
+void onThree(char* opponentchoice){
 //randomly generates a num 1-3 and sets the string passed in to R P or S.
 //opponentchoice = malloc(sizeof(char));
 int randomGen = 0;
@@ -84,12 +84,12 @@ int main(){
     char user[1] = {""};
     printf("%s\n", user);
 
-    //char* opponentPointer  = (char*)malloc(sizeof(char));
-    char* opponentPointer;
-    //char opponentRPS[] = {"R"};
-    char opponentRPS[] = {""};
-    opponentPointer = opponentRPS;
-    generateRPS(opponentRPS);
+    //char* opponent  = (char*)malloc(sizeof(char));
+    char* opponent;
+    //char Pika[] = {"R"};
+    char Pika[] = {""};
+    opponent = Pika;
+    onThree(Pika);
     while (strcmp(user,"R") != 0 && strcmp(user,"P") != 0 && strcmp(user,"S") != 0 && strcmp(user,"Z") != 0){
       printf("Type in your choice.\n");
       scanf("%s", user);
@@ -114,7 +114,7 @@ int main(){
 
 
 /*
-void generateRPS(char* opponentchoice){
+void onThree(char* opponentchoice){
 opponentchoice = malloc(sizeof(char));
 int randomGen = 0;
 char robotRandArray[1];
