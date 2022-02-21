@@ -8,63 +8,64 @@
 FILE *fp;
 int *highscore;
 
-void onThree(char* opponentchoice){
+char generateRPS(){
 //randomly generates a num 1-3 and sets the string passed in to R P or S.
-//opponentchoice = malloc(sizeof(char));
+char opponentchoice;
 int randomGen = 0;
 srand(time(0));
 randomGen = rand()%3;
 
 if(randomGen == 0){
-  strncpy(opponentchoice , "R", 3);
+  opponentchoice = 'R';
 }
 else if(randomGen == 1){
-  strncpy(opponentchoice , "P", 3);
+  opponentchoice = 'P';
 }
 else{
-  strncpy(opponentchoice , "S", 3);
+  opponentchoice = 'S';
 }
-printf("Opponent chooses: %s\n", opponentchoice);
+printf("Opponent chooses: %c\n", opponentchoice);
 //since this is a pointer, you don't have to return a value to change anything. Remember this technique!
+return opponentchoice;
 }
 
-int outcome (char* userchoice, char* botchoice){
-  //userchoice  = (char* )malloc(sizeof(char));
-  //botchoice  = (char* )malloc(sizeof(char));
+void resethighscore (){
+  printf("Reseting high score to default.........");
+  fp = fopen("C:/Users/calum/Desktop/RPS Simulator/highscoresourcefile.txt", "w+");
+  fprintf(fp, "1");
+  *highscore = 1;
+  exit(0);
+}
+
+
+int outcome (char userchoice, char botchoice){
 
   //Returns a 0 or 1 to add to the current score, based on the comparisons of the player and computer choices. this also contains a function for changing the highscore back
   //to 1 via overwriting the source file for said score.
 
   int result = 0;
-  if(strcmp(userchoice,"Z") == 0){
-    printf("Reseting high score to default.........");
-    fp = fopen("C:/Users/calum/Desktop/RPS Simulator/highscoresourcefile.txt", "w+");
-    fprintf(fp, "1");
-    *highscore = 1;
-    exit(0);
+  if(userchoice == 'M'){
+    resethighscore();
   }
   //rock beats scissors, paper beats rock, scissors beats paper
-  else if(strcmp(userchoice,"R") == 0 && strcmp(botchoice,"S") == 0){
+  else if(userchoice == 'R' && botchoice == 'S'){
+    printf("         Win!\n");
     result = 1;
   }
-  else if(strcmp(userchoice,"P") == 0 && strcmp(botchoice,"R") == 0){
+  else if(userchoice == 'P' && botchoice == 'R'){
+    printf("         Win!\n");
     result = 1;
   }
-  else if(strcmp(userchoice,"S") == 0 && strcmp(botchoice,"P") == 0){
+  else if(userchoice == 'S' && botchoice == 'P'){
+    printf("         Win!\n");
     result = 1;
   }
 
   else{
-    printf("Tie.\n");
-/*
-    printf("User choice is %s\n", userchoice);
-    printf("Bot choice is %s\n", botchoice);
-*/
+    printf("         Tie.\n");
     result = 0;
   }
   return result;
-  //free(userchoice);
-  //free(botchoice);
 }
 
 
@@ -80,27 +81,25 @@ int main(){
   int currentscore = 0;
   printf("Score to beat is %d!\n", hs);
 
-  for(int i = 0; i < 3; i++){
-    char user[1] = {""};
-    printf("%s\n", user);
+  for(int i = 0; i < 60; i++){
+    //char user = ' ';
+    char user[3] = " \0";
+    printf("%c\n", user[0]);
 
-    //char* opponent  = (char*)malloc(sizeof(char));
-    char* opponent;
-    //char Pika[] = {"R"};
-    char Pika[] = {""};
-    opponent = Pika;
-    onThree(Pika);
-    while (strcmp(user,"R") != 0 && strcmp(user,"P") != 0 && strcmp(user,"S") != 0 && strcmp(user,"Z") != 0){
+    char opponentRPS = ' ';
+    opponentRPS = generateRPS();
+    while (user[0] != 'R' && user[0] != 'P' && user[0] != 'S' && user[0] != 'M'){
       printf("Type in your choice.\n");
-      scanf("%s", user);
+      scanf(" %c", user);
     }
 
-    printf("Opponent is %s.\n", opponent);
+    if(user[0] != 'M'){
+      printf("Opponent is %c.\n", opponentRPS);
+    }
 
-    currentscore += outcome(user,opponent);
-    printf("The current score is %d.\n", currentscore);
+    currentscore += outcome(user[0],opponentRPS);
+    printf("The current score is %d.\n\n\n\n", currentscore);
   }
-  //free(opponent);
   if(currentscore > hs){
     hs = currentscore;
     fp = fopen("C:/Users/calum/Desktop/RPS Simulator/highscoresourcefile.txt", "w+");
@@ -111,31 +110,3 @@ int main(){
     printf("The high score is %d.\n", hs);
 }
 }
-
-
-/*
-void onThree(char* opponentchoice){
-opponentchoice = malloc(sizeof(char));
-int randomGen = 0;
-char robotRandArray[1];
-
-srand(time(0));
-randomGen = rand()%3;
-
-//char Rock[1] = "R";
-//char Paper[1] = "P";
-//char Scissors[1] = "S";
-
-if(randomGen == 0){
-  strncpy(opponentchoice , "R", 1);
-}
-else if(randomGen == 1){
-  strncpy(opponentchoice , "P", 1);
-}
-else{
-  strncpy(opponentchoice , "S", 1);
-}
-//opponentchoice = Rock;
-//since this is a pointer, you don't have to return a value to change anything. Remember this technique!
-}
-*/
