@@ -9,7 +9,7 @@ FILE *fp;
 int *highscore;
 
 char generateRPS(){
-//randomly generates a num 1-3 and sets the string passed in to R P or S.
+//randomly generates a num 1-3 and returns that value
 char opponentchoice;
 int randomGen = 0;
 srand(time(0));
@@ -25,11 +25,11 @@ else{
   opponentchoice = 'S';
 }
 printf("Opponent chooses: %c\n", opponentchoice);
-//since this is a pointer, you don't have to return a value to change anything. Remember this technique!
 return opponentchoice;
 }
 
 void resethighscore (){
+  //Resets the score in the text source file.
   printf("Reseting high score to default.........");
   fp = fopen("C:/Users/calum/Desktop/RPS Simulator/highscoresourcefile.txt", "w+");
   fprintf(fp, "1");
@@ -39,8 +39,7 @@ void resethighscore (){
 
 
 int outcome (char userchoice, char botchoice){
-
-  //Returns a 0 or 1 to add to the current score, based on the comparisons of the player and computer choices. this also contains a function for changing the highscore back
+  //Returns a 0 or 1 to add to the current score, based on the comparisons of the player and computer choices. This also contains a function call for changing the highscore back
   //to 1 via overwriting the source file for said score.
 
   int result = 0;
@@ -76,7 +75,8 @@ int main(){
   char txtcontents[2];
   fp = fopen("C:/Users/calum/Desktop/RPS Simulator/highscoresourcefile.txt", "r+");
   fgets(txtcontents, 2, fp);
-  int hs = atoi(txtcontents);//atoi coinverts a string/char array to int or returns an error.
+  int hs = atoi(txtcontents);
+  //atoi coinverts a string/char array to int or returns an error.
   highscore = &hs;
   int currentscore = 0;
   printf("Score to beat is %d!\n", hs);
